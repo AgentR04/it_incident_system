@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/incidents")
-@CrossOrigin(origins = "http://localhost:5173") // Allow frontend (Vite) to access backend
 public class IncidentController {
 
     private final IncidentService incidentService;

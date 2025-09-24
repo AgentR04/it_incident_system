@@ -1,37 +1,25 @@
-import axios from "axios";
-
-const API_BASE_URL = "http://localhost:8080/api/incidents";
-
-// Encode "admin:admin123" to Base64 → Basic YWRtaW46YWRtaW4xMjM=
-const AUTH_HEADER = "Basic " + btoa("admin:admin123");
-
-const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    Authorization: AUTH_HEADER,
-    "Content-Type": "application/json",
-  },
-});
+import http from "./http";
+const API_BASE_URL = "/api/incidents";
 
 // 🔹 Get all incidents
-export const getAllIncidents = () => axiosInstance.get("/");
+export const getAllIncidents = () => http.get(API_BASE_URL);
 
 // 🔹 Get incident by ID
-export const getIncidentById = (id) => axiosInstance.get(`/${id}`);
+export const getIncidentById = (id) => http.get(`${API_BASE_URL}/${id}`);
 
 // 🔹 Create new incident
-export const createIncident = (incident) => axiosInstance.post("/", incident);
+export const createIncident = (incident) => http.post(API_BASE_URL, incident);
 
 // 🔹 Update incident
 export const updateIncident = (id, incident) =>
-  axiosInstance.put(`/${id}`, incident);
+  http.put(`${API_BASE_URL}/${id}`, incident);
 
 // 🔹 Delete incident
-export const deleteIncident = (id) => axiosInstance.delete(`/${id}`);
+export const deleteIncident = (id) => http.delete(`${API_BASE_URL}/${id}`);
 
 // 🔹 Search incidents
 export const searchIncidents = (params) =>
-  axiosInstance.get("/search", { params });
+  http.get(`${API_BASE_URL}/search`, { params });
 
 // 🔹 Default export for easy import
 const incidentApi = {
